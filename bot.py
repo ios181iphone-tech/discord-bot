@@ -13,6 +13,8 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 
 CHECKIN_CHANNEL_ID = 123456789012345678
 LOG_CHANNEL_ID = 123456789012345678
+ADMIN_CHANNEL_ID = 1315024239220232264  # روم الإدارة
+
 DATA_FILE = "data.json"
 
 if os.path.exists(DATA_FILE):
@@ -98,6 +100,34 @@ async def ترتيب(ctx):
             )
 
     await ctx.send(leaderboard)
+
+# ------------------ أوامر الإدارة ------------------
+
+@bot.command()
+@commands.has_permissions(administrator=True)
+async def تصفير(ctx):
+    if ctx.channel.id != ADMIN_CHANNEL_ID:
+        await ctx.send("❌ هذا الأمر مخصص لروم الإدارة فقط")
+        return
+
+    data["users"] = {}
+    save_data()
+    await ctx.send("✅ تم تصفير جميع الساعات بنجاح")
+
+@bot.command()
+@commands.has_permissions(administrator=True)
+async def اضافة(ctx, member: discord.Member, hours: int):
+    if ctx.channel.id != ADMIN_CHANNEL_ID:
+        await ctx.send("❌ استخدم الأمر في روم الإدارة فقط")
+        return
+
+    user_id = str(member.id)
+    data["users"][user_id] = data["users"].get(user_id, 0) + (hours * 3600)
+    save_data()
+
+    await ctx.send(f"✅ تم إضافة {hours} ساعة لـ {member.mention}")
+
+# ----------------------------------------------------
 
 @tasks.loop(hours=24)
 async def reset_check():
