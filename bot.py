@@ -1045,8 +1045,24 @@ logger.info("Auto reset loop ready")
 
 # ==================== RUN BOT ==================== 
 
+from flask import Flask
+from threading import Thread
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "Bot is running!"
+
+def run_web():
+    app.run(host="0.0.0.0", port=10000)
+
+def keep_alive():
+    t = Thread(target=run_web)
+    t.start()
 if __name__ == "__main__":
     token = os.getenv("TOKEN")
+    keep_alive()
     logger.info("Starting bot...")
     bot.run(token)
 
