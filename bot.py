@@ -30,7 +30,7 @@ bot = commands.Bot(command_prefix="-", intents=intents, help_command=None)
 
 # ================= CONFIGURATION ================= 
 
-class Config:
+    class Config:
     # Channel IDs
     LOGIN_BLACK = 1477712613252272190
     LOGIN_SUPERME = 1477712637901930701
