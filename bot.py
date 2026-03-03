@@ -26,9 +26,9 @@ intents.message_content = True
 intents.voice_states = True 
 intents.members = True 
 
-bot = commands.Bot(command_prefix="-", intents=intents, help_command=None) 
+bot = commands.Bot(command_prefix="-", intents=intents, help_command=None)
 
-# ==================== CONFIGURATION ==================== 
+# ================= CONFIGURATION ================= 
 
 class Config: 
 # Channel IDs 
