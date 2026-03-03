@@ -1045,13 +1045,8 @@ logger.info("Auto reset loop ready")
 
 # ==================== RUN BOT ==================== 
 
-if __name__ == "__main__": 
-token = os.getenv("TOKEN") 
-if not token: 
-logger.error("Token not found in .env file") 
-print("❌ خطأ: ما لقيت التوكن في ملف .env") 
-print("💡 تأكد إنك عامل ملف .env وفيه: TOKEN=هنا_توكن_البوت") 
-exit(1) 
+if __name__ == "__main__":
+    token = os.getenv("TOKEN")
+    logger.info("Starting bot...")
+    bot.run(token)
 
-logger.info("Starting bot...") 
-bot.run(token)
