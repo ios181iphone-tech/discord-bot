@@ -4,7 +4,7 @@ import json
 import os
 from datetime import datetime
 
-TOKEN =  "PUT_YOUR_TOKEN_HERE"
+TOKEN = os.getenv("TOKEN")
 
 ADMIN_ROLE = 1465006200889413663
 
